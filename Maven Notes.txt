@@ -1,0 +1,273 @@
+
+------------------------------------------------------------------------------------------------------------------------------
+Additional Information will mention in the pom.xml  File 
+
+ --- This is about oraganazation 
+	<organization>
+		<name>AuraCloud</name>
+		<url>www.auracloud.com</url>
+	</organization>
+
+	--- this line we commented beacause this line of code we are taking form parent pom.xml 
+	<developers>
+	<developer>
+	<id>12</id>
+	<name>ABC</name>
+	<email>ABC@gmail.com</email>
+	</developer>
+	</developers>
+
+------------------------------------------------------------------------------------------------------------------------------
+
+--- we can customize or change the the Repositories  ... -
+	<distributionManagement>
+	<repository>
+	<id>releases</id>
+	<name>IdealInvent release repository</name>
+	--this is url here all the folder will strore and from here other developers can use it.... 
+	--for organization will make sperate Remote Repositories and if one developer added some Depedencies in local it should be present for the developer by this remote repoo...
+	<url>http://scm.idealinvent.com/nexus/content/repositories/releases/</url>
+	</repository>
+	</distributionManagement>
+	
+------------------------------------------------------------------------------------------------------------------------------
+	
+	
+This is About <Build> Tag
+
+<!-- this will change the standard directories path while building. -->
+<build>
+<!-- this will change the path of src/main/java to what we set  -->
+<sourceDirectory>src.nonstandard.java</sourceDirectory>
+<!-- in this location ours files wil get store after the build done -->
+<!-- all type of files will store here instead of Target Folder -->
+<!-- <directory>myTarget</directory> -->
+</build>
+
+------------------------------------------------------------------------------------------------------------------------------
+
+
+Inheritance:
+pom will inherita similier as Java files
+super pom.xml is present in apache tomacat server 
+and every pom.xml will inherita form thier ...and 
+and if i have multiple project and some of project having similer pom.xml cofiguration then instead of writting all thing in every pom.xml we can write in once and inherita for the other pom.xml like super class to chuld class
+
+--this command will give the STRUCTUREor code of the pom.xml including the super pom.xml also 
+mvn help:effective-pom
+
+BY Parent Tag we can inherit the parent pom.xml
+in parent tag need to mention parent project Artifact-id and version , and group-id condtition(group-id of child and parent project should have same)
+in child pom.xml need to comnment the version and group-id of the child pom.xml 
+Tags ---
+<parent>
+		<groupId>com.sample</groupId>
+		<artifactId>Maven_Parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	
+------------------------------------------------------------------------------------------------------------------------------
+	
+	
+	--profile Tag
+	it will help to build the project depends on enviornment
+Maven profiles allow you to customize the build process for different environments or situations.
+
+we can active profile based on condtions also
+
+
+	<!-- Profile -->
+<!-- 	<profiles> -->
+<!-- 		<profile> -->
+<!-- 		before Build File or jarFile or warFile was generating in Target Folder by default   -->
+<!-- 		but only for production environment it should generate the files in some other path so below we gave the path inside <build> Tag -->
+<!-- 		Command to select as Production environment  *** Commad*** mvn P(below given Id ) clean package or etc -->
+<!-- and instead of seperate command we can give in properties > maven > properties (Id Value) if matching then it will trigger this profile -->
+<!-- 			<id>production</id> -->
+			
+<!-- 			no need to run the profile or no need to mention in maven properties   -->
+<!-- we need to activate the profile by based on condtions  -->
+<!-- Like 1. Environment value -->
+<!--      2. opertating Sysytem  -->
+<!--      3. Jdk Version -->
+<!--      so on  -->
+<!-- 			<activation> -->
+<!-- 			<property> -->
+<!-- 			<name>env.prod</name> -->
+<!-- 			<value>production</value> -->
+<!-- 			</property> -->
+<!-- 			</activation> -->
+<!-- 			<build> -->
+<!-- 				<directory>productiontarget</directory> -->
+<!-- 			</build> -->
+<!-- 		</profile> -->
+<!-- 	</profiles> -->
+
+------------------------------------------------------------------------------------------------------------------------------
+
+-----  Chapter   Depedencies Management   ----- 
+
+	1.Transitive Depedencies
+	Transitive Depedencies is nothing But I want A Depedencies But A depedent on B also so "B" is trasitive Depedencies
+	If I Add "A" Depedencies it will include B Depedencies also ...
+	How it include :  If we add A Depedencies then it will read A--> pom.xml inside A-->pom.xml they mentioned B Depedencies form thier it will get B Depedencies also if B--> pom.xml has any Depedencies like C Depedencies it will include those also
+	
+	2. Remote Repositories
+	By default we mentioned cenrteral Repositories url in super pom.xml ---if want change that url to something ELSE
+	then settings.xml we need to change it ...<Repositories> in this tag inside the pofile tag
+	
+	3. Depedencies SCOPE
+	   default scope is Compile ...
+	  
+	4. Conflict Resolution
+------------------------------------------------------------------------------------------------------------------------------
+	
+	
+----  chapter Maven LifeCycle and Plugins   -----
+Maven Lificycle :--
+it has 3 lifecycle Default , Site and Clean 
+all life cycles has its life cylce phases and default lifecycle having most used and more phases in it ...
+	
+Install Phase :-install the package into the local Repositories ,for use as a dependency in other project locally...
+Deploy Phase :- if i custmized the remote Repositories for our ORGANIZATION use , then after packaging the new Depedencies
+              those files it will add into the ours customized remote Repositories so we can share it to the other developers....
+			  How we can customize or change the  the Repositories ...
+			  <distributionManagement>
+		        <repository>
+			       <id>releases</id>
+			       <name>IdealInvent release repository</name>
+				   ---this is url here all the folder will strore and from here other developers can use it....
+			       <url>http://scm.idealinvent.com/nexus/content/repositories/releases/</url>
+		       </repository>
+			 </distributionManagement>
+------------------------------------------------------------------------------------------------------------------------------
+
+----Plugins----
+Maven is actually a plugin execution framework where every task is actually done by plugins
+This plugins will excute while excuting phases of the life cycle 
+By default life cycle phases having the Plugins which will  bounded to the phases and while running the phases this plugins also runs ...
+
+Example : By Plugins They perform tasks such as compilation, testing, packaging, deployment, and others (those are inbuilt plgins added to the LifeCycle)
+Types of Maven Plugin
+1. Build Plugins    2. Reporting Plugins
+
+1. Build Plugins:-
+These plugins are executed during the build process and these are defined in the <build> section in the pom.xml file.
+	
+2. Reporting Plugins
+These plugins are used for generating reports about the project. These are defined in the <reporting> section in the pom.xml file.	
+
+Custome Plugin while building the project 
+<!-- Plugins -->
+<!-- 		This is Customized  Plugin , this plugin is bound with Package Phase *** and whwnever this phase will trigger ..this pluigns will also trigger -->
+		<plugins>
+			<plugin>
+<!-- 			this is plugin details -->
+<!-- we can take this plugins details like groupid , artifactid , and version as other pom.xml also so it will trigger that pom.xml and include all the thing which are mentioned the pom.xml -->
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>3.2.0</version>
+				<executions>
+					<execution>
+<!-- 					we can give anything as Id -->
+						<id>Custom - plugin</id>
+						
+<!-- 						this is configuration tag we can specify name of the directory and filename which generated o=so on  -->
+						<configuration>
+<!-- 						this will create new directory outside the target folder with mentioned name  -->
+						<outputDirectory>testjarfile</outputDirectory>
+<!-- 						if thier no changes done in previous jar file and then  currently generating file will not generate keep it same  -->
+<!-- 						But this will force to create it again -->
+					<forceCreation>true</forceCreation>
+<!-- 					this will be the generated jar file name -->
+					 <finalName>custom-jar-filename</finalName> 
+						</configuration>
+<!-- 						in this phase our goal or action will work  -->
+						<phase>package</phase>
+						<goals>
+<!-- 						this is action will take will runing this plugin -->
+							<goal>test-jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+		
+------------------------------------------------------------------------------------------------------------------------------
+		
+		
+-----  Java Doc Plugins ---
+<pluginManagement> : The <pluginManagement> tag in Maven is used to define and configure plugins within the pom.xml file, but with a key difference: it does not directly execute the plugins. Instead, it specifies the default configuration for plugins that can be inherited by child projects or used later within the <plugins> section of the build configuration.
+
+this <pluginManagement> inside this tag only inherited plugins can use directly use (inherited means this plugins should present or taken form super-pom.xml file) 
+if plugins are not present inside the super --pom.xml then need to follow this structure..
+
+<build>
+----this is not present inside the super.pom.xml file  so --First will declare outisde the pluginManagement then again we will use inside the pluginManagement....
+ <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.8.1</version>  <!-- Version can be inherited -->
+        </plugin>
+    </plugins>
+	
+    <pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </pluginManagement>
+</build>
+
+what is jovaDoc --Javadoc is a tool provided by Java for generating API documentation in HTML format from Java source code.
+JavaDoc is nothing but its documnetion generatred for the java files ...(its describes the method ,varibles and other things of that class)
+------------------------------------------------------------------------------------------------------------------------------
+
+
+----- chapter -->  Archetypes   -----
+By this Archetypes we will get we will get maven template 
+while creating maven project we will select Archetypes by this will get ready template for maven ...
+
+ creating custome Archetypes(means creating custom maven template)
+------------------------------------------------------------------------------------------------------------------------------
+ 
+-----  MultiModule Projects    --------
+Example : we will be having many projects , and i want to do certain opertion like maven update or git pull for all the projects
+then instead of doing for all the  project we will create one general project 
+in general project pom.xml will mention all the project Archetypes in <module> tag and it will take care ...
+
+
+<!-- this tag includes submodules and for submodules will get rights to the parent module -->
+<!-- form parent project we can do maven opertation for child projects -->
+<modules>
+<module>../Multimodule-Project1</module>
+<module>../Multimodule_Project2</module>
+------------------------------------------------------------------------------------------------------------------------------
+
+
+----chapter    Additional Information ----
+Chapter Objectives
+1. learn how to deploy a web application on server
+2. discover how to encrypte the credentials
+
+
+3. use properties to make dynamic configurations
+   <properties>
+		<excludedTestNGGroups>ctsrt,bldaut</excludedTestNGGroups>
+		<obfuscateCore>true</obfuscateCore>
+		<lucene.version>8.11.2</lucene.version>
+	</properties>
+  we can use it our pom.xml in many places dynamically by chnaging only at one place..
+
+
+
+--check while creating project --each and every screen..
+
