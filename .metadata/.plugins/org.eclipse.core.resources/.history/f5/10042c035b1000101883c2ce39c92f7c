@@ -1,0 +1,32 @@
+package Sheet;
+
+import java.util.Arrays;
+
+public class Missing_and_Repeating_in_Array {
+public static void main(String[] args) {
+	int[] arr= {4, 3, 6, 2, 1, 1};
+	Arrays.sort(arr);
+	for(int i=0;i<arr.length;i++) {
+	System.out.println(arr[i]);
+	}
+	
+	int dup = 0;
+	int mis = 0;
+	for(int i=0;i<arr.length;i++) {
+		if(arr[i]!=i+1) {
+			if(i==0) {
+				mis=i;
+			}else {
+				if(arr[i-1]==arr[i]) {
+					dup=arr[i];
+				}else {
+					mis=i+1;
+				}
+			}
+			
+		}
+	}
+	System.out.println("missing number "+mis +" Duplicate Number "+dup);
+	
+}
+}

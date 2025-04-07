@@ -1,0 +1,7 @@
+package Sheet;
+
+public class Missing_and_Repeating_in_Array {
+public static void main(String[] args) {
+	
+}
+}

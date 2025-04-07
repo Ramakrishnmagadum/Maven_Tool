@@ -1,0 +1,184 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<!-- this twi lines comment because we are taking this from parent pom.xml -->
+	<!-- <groupId>com.sample</groupId> -->
+	<!-- <version>0.0.1-SNAPSHOT</version> -->
+
+	<artifactId>Maven_Project</artifactId>
+
+	<packaging>war</packaging>
+
+	<name>Maven_Project</name>
+	<url>http://maven.apache.org</url>
+
+	<organization>
+		<name>AuraCloud</name>
+		<url>www.auracloud.com</url>
+	</organization>
+
+	<!-- this line we commented beacause this line of code we are taking form 
+		parent pom.xml -->
+	<!-- <developers> -->
+	<!-- <developer> -->
+	<!-- <id>12</id> -->
+	<!-- <name>ABC</name> -->
+	<!-- <email>ABC@gmail.com</email> -->
+	<!-- </developer> -->
+	<!-- </developers> -->
+
+	<!-- this will inheritance from parent pom.xml -->
+	<parent>
+		<groupId>com.sample</groupId>
+		<artifactId>Maven_Parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+
+	<!-- we can customize or change the the Repositories ... -->
+	<!-- <distributionManagement> -->
+	<!-- <repository> -->
+	<!-- <id>releases</id> -->
+	<!-- <name>IdealInvent release repository</name> -->
+	<!--this is url here all the folder will strore and from here other 
+		developers can use it.... -->
+	<!-- <url>http://scm.idealinvent.com/nexus/content/repositories/releases/</url> -->
+	<!-- </repository> -->
+	<!-- </distributionManagement> -->
+
+	<!-- this will change the standard directories path while building. -->
+	<build>
+		<!-- this will change the path of src/main/java to what we set -->
+		<sourceDirectory>src.nonstandard.java</sourceDirectory>
+		<!-- in this location ours files wil get store after the build done -->
+		<!-- all type of files will store here instead of Target Folder -->
+		<!-- <directory>myTarget</directory> -->
+
+
+
+		<!-- Plugins -->
+		<!-- This is Customized Plugin , this plugin is bound with Package Phase 
+			*** and whwnever this phase will trigger ..this pluigns will also trigger -->
+		<plugins>
+			<plugin>
+				<!-- this is plugin details -->
+				<!-- we can take this plugins details like groupid , artifactid , and 
+					version as other pom.xml also so it will trigger that pom.xml and include 
+					all the thing which are mentioned the pom.xml -->
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>3.2.0</version>
+				<executions>
+					<execution>
+						<!-- we can give anything as Id -->
+						<id>Custom - plugin</id>
+
+						<!-- this is configuration tag we can specify name of the directory 
+							and filename which generated o=so on -->
+						<!-- <configuration> -->
+						<!-- this will create new directory outside the target folder with 
+							mentioned name -->
+						<!-- <outputDirectory>testjarfile</outputDirectory> -->
+						<!-- if thier no changes done in previous jar file and then currently 
+							generating file will not generate keep it same -->
+						<!-- But this will force to create it again -->
+						<!-- <forceCreation>true</forceCreation> -->
+						<!-- this will be the generated jar file name -->
+						<!-- <finalName>custom-jar-filename</finalName> -->
+						<!-- </configuration> -->
+						<!-- in this phase our goal or action will work -->
+						<phase>package</phase>
+						<goals>
+							<!-- this is action will take will runing this plugin -->
+							<goal>test-jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+
+			<!-- Java Doc Code -->
+			<plugin>
+<!-- 			this is javacode depedencies which is not present in super pom.xml File -->
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>3.1.0</version>
+				<configuration>
+					<footer>This is Footer</footer>
+					<header>This is Header</header>
+				</configuration>
+				<executions>
+					<execution>
+						<id>Java Doc</id>
+						<phase>install</phase>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+
+		</plugins>
+
+
+	</build>
+
+
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<dependencies>
+
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.1</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<!-- Profile -->
+	<profiles>
+		<profile>
+			<!-- before Build File or jarFile or warFile was generating in Target 
+				Folder by default -->
+			<!-- but only for production environment it should generate the files 
+				in some other path so below we gave the path inside <build> Tag -->
+			<!-- Command to select as Production environment *** Commad*** mvn P(below 
+				given Id ) clean package or etc -->
+			<!-- and instead of seperate command we can give in properties > maven 
+				> properties (Id Value) if matching then it will trigger this profile -->
+			<id>production</id>
+
+			<!-- no need to run the profile or no need to mention in maven properties -->
+			<!-- we need to activate the profile by based on condtions -->
+			<!-- Like 1. Environment value -->
+			<!-- 2. opertating Sysytem -->
+			<!-- 3. Jdk Version -->
+			<!-- so on -->
+			<!-- <activation> -->
+			<!-- <property> -->
+			<!-- <name>env.prod</name> -->
+			<!-- <value>production</value> -->
+			<!-- </property> -->
+			<!-- </activation> -->
+			<!-- <build> -->
+			<!-- <directory>productiontarget</directory> -->
+			<!-- </build> -->
+
+		</profile>
+
+	</profiles>
+
+
+
+
+
+
+</project>

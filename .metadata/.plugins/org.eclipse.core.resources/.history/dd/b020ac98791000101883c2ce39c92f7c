@@ -1,0 +1,64 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	
+	<modelVersion>4.0.0</modelVersion>
+
+	<!-- this twi lines comment because we are taking this from parent pom.xml -->
+	<!-- <groupId>com.sample</groupId> -->
+	<!-- <version>0.0.1-SNAPSHOT</version> -->
+
+	<artifactId>Maven_Project</artifactId>
+
+	<packaging>jar</packaging>
+
+	<name>Maven_Project</name>
+	<url>http://maven.apache.org</url>
+
+	<organization>
+		<name>AuraCloud</name>
+		<url>www.auracloud.com</url>
+	</organization>
+
+	<!-- this line we commented beacause this line of code we are taking form 
+		parent pom.xml -->
+	<!-- <developers> -->
+	<!-- <developer> -->
+	<!-- <id>12</id> -->
+	<!-- <name>ABC</name> -->
+	<!-- <email>ABC@gmail.com</email> -->
+	<!-- </developer> -->
+	<!-- </developers> -->
+
+<!-- this will inheritance from parent pom.xml -->
+<!-- 	<parent> -->
+<!-- 		<groupId>com.sample</groupId> -->
+<!-- 		<artifactId>Maven_Parent</artifactId> -->
+<!-- 		<version>0.0.1-SNAPSHOT</version> -->
+<!-- 	</parent> -->
+
+
+	<!-- this will change the standard directories path while building. -->
+	<build>
+		<!-- this will change the path of src/main/java to what we set -->
+		<sourceDirectory>src.nonstandard.java</sourceDirectory>
+		<!-- in this location ours files wil get store after the build done -->
+		<!-- all type of files will store here instead of Target Folder -->
+		<!-- <directory>myTarget</directory> -->
+	</build>
+
+
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.1</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+</project>

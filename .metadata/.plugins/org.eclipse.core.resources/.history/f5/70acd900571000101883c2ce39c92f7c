@@ -1,0 +1,8 @@
+package Sheet;
+
+public class Missing_and_Repeating_in_Array {
+public static void main(String[] args) {
+	int arr[]= {4, 3, 6, 2, 1, 1};
+	
+}
+}
