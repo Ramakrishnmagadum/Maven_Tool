@@ -260,14 +260,13 @@ Chapter Objectives
 
 
 3. use properties to make dynamic configurations
+
    <properties>
-		<excludedTestNGGroups>ctsrt,bldaut</excludedTestNGGroups>
+   versionnumber --this name we can give anything ,this name like varible it will store the value whatever we provide inside this tag ,and in this pom.xml we can fetch this value by ${versionnumber} 
+   --Example : inside version tag get dynamic values <version>${versionnumber} </version>
+		<versionnumber>2.1.1</versionnumber>
 		<obfuscateCore>true</obfuscateCore>
 		<lucene.version>8.11.2</lucene.version>
 	</properties>
   we can use it our pom.xml in many places dynamically by chnaging only at one place..
-
-
-
---check while creating project --each and every screen..
 
